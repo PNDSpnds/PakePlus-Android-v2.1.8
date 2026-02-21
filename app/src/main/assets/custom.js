@@ -24,3 +24,9 @@ window.open = function (url, target, features) {
 }
 
 document.addEventListener('click', hookClick, { capture: true })
+
+// ========== 我们的保活JS，加在默认代码的最下面 ==========
+// 后台心跳保活，防止App被系统回收
+setInterval(() => {
+  fetch('/api/check-login').catch(() => {});
+}, 30000); // 每30秒发一次心跳请求
